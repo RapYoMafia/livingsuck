@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<p>
+ <%= image_tag @gallery_item.image.url(:iphone_gallery) %>
+</p>
+
+
+<p>
+  <b>Description:</b>
+  <%= @gallery_item.description %>
+</p>
+
+<p>
+  <b>Article:</b>
+  <%= @gallery_item.article.title %>
+</p>
+
+
+<%= link_to 'Edit', edit_gallery_item_path(@gallery_item) %> |
+<%= link_to 'Back', gallery_items_path %>
+
+
+
+

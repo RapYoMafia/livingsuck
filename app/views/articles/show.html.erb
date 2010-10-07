@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @article.title %>
+</p>
+
+<p>
+  <b>Subtitle:</b>
+  <%= @article.subtitle %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @article.body %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @article.date %>
+</p>
+
+<p>
+  <b>Article category:</b>
+  <%= @article.article_category.name %>
+</p>
+
+
+
+
+<%# comment --%>
+
+<% @gallery_items = GalleryItem.where(:article_id =>params[:id]) %>
+<table>
+  <tr>
+    <th>Preview</th>
+    <th>Description</th>
+    <th>Article</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gallery_items.each do |gallery_item| %>
+  <tr>
+    <td><%= image_tag gallery_item.image.url(:iphone_thumb) %></td>
+    <td><%= gallery_item.description %></td>
+    <td><%= gallery_item.article.title %></td>
+    <td><%= link_to 'Show', gallery_item %></td>
+    <td><%= link_to 'Edit', edit_gallery_item_path(gallery_item) %></td>
+    <td><%= link_to 'Destroy', gallery_item, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
+

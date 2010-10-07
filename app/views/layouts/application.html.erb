@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LivingETC</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+
+<%= yield %>
+
+
+<br/>
+
+<br/>
+<b>Go to >> </b>
+<li><a href="http://localhost:3000/articles">Article</a></li>
+
+<li><a href="http://localhost:3000/article_categories">Article Category</a></li>
+<li><a href="http://localhost:3000/gallery_items">Gallery Items</a></li>
+
+</body>
+</html>
