@@ -14,13 +14,58 @@ class ArticleCategoriesController < ApplicationController
   # GET /article_categories/1.xml
   def show
     @article_category = ArticleCategory.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @article_category }
+      format.xml do
+        result=Array.new
+        @article_category.articles.each do |article|
+          hash = Hash.new
+          hash[:title] = article.title
+          hash[:subtitle] = article.subtitle
+          hash[:url] = "/article_bb/#{article.id}"
+          hash[:gallery_url] = "/articles/#{article.id}.xml"
+          hash[:date] = article.date
+          if article.gallery_items != []
+            hash[:thumbnail] = article.gallery_items[0].image.url(:iphone_thumb).gsub(/\?.*$/, "").gsub(" ", "%20")
+          end
+          # hash[:thumbnails] = Array.new
+          # hash[:gallery_photos] = Array.new
+          # article.gallery_items.each do |gallery_item|
+          #   hash[:thumbnails].push gallery_item.image.url(:iphone_thumb).gsub(/\?.*$/, "").gsub(" ", "%20")
+          #   hash[:gallery_photos].push gallery_item.image.url(:iphone_gallery).gsub(/\?.*$/, "").gsub(" ", "%20")
+          # end
+          result.push hash
+        end
+        render :xml => result
+      end
+      
+      # format.json do
+      #   result_hash= Array.new
+      #   articles = @article_category.articles
+      #   0.upto(@article_category.articles.size()-1) do |article_id|
+      #     article = articles[article_id]
+      #     hash = Hash.new
+      #     hash[:title] = article.title
+      #     hash[:category] = article.article_category.name.upcase
+      #     hash[:date] = article.date
+      #     hash[:id] = article.id
+      #     result_hash.push hash
+      #   end
+      #   render :json => result_hash.to_json
+      # end
     end
   end
 
+
+  def article_category_ajax
+    @article_category = ArticleCategory.find(params[:id])
+    
+    respond_to do |format|
+      format.html {render :template => "article_categories/show_ajax", :layout => false}
+    end
+  end
+  
+  
   # GET /article_categories/new
   # GET /article_categories/new.xml
   def new

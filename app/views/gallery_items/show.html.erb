@@ -2,8 +2,25 @@
 
 
 
-<p>
+
+
+<p>IPHONE 320x480<br />
  <%= image_tag @gallery_item.image.url(:iphone_gallery) %>
+</p>
+
+
+<p>BB 480x360<br />
+ <%= image_tag @gallery_item.image.url(:bb) %>
+</p>
+
+
+<p>BB SMALL  320x240<br />
+ <%= image_tag @gallery_item.image.url(:bb_small) %>
+</p>
+
+
+<p>IPHONE THUMB 75x75<br />
+ <%= image_tag @gallery_item.image.url(:iphone_thumb) %>
 </p>
 
 
@@ -14,7 +31,7 @@
 
 <p>
   <b>Article:</b>
-  <%= @gallery_item.article.title %>
+  <%= @gallery_item.try(:article).try :title %>
 </p>
 
 

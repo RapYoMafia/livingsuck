@@ -51,12 +51,17 @@ LivingETC::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
+  match 'article_ajax/:id' => 'articles#article_ajax'
+  match 'article_bb/:id' => 'articles#article_bb'
+  match 'article_category_ajax/:id' => 'article_categories#article_category_ajax'
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  #root :to => "articles#index"
 
   # See how all your routes lay out with "rake routes"
+
+  match 'iphone' => 'articles#redirect_to_iphone'
+  root :to => "articles#redirect_to_download"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.

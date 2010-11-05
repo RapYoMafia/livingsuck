@@ -4,7 +4,9 @@
   <tr>
     <th>Preview</th>
     <th>Description</th>
+    <th>ID</th>
     <th>Article</th>
+    <th>filename</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,7 +16,9 @@
   <tr>
     <td><%= image_tag gallery_item.image.url(:iphone_thumb) %></td>
     <td><%= gallery_item.description %></td>
-    <td><%= gallery_item.article.title %></td>
+    <td><%= gallery_item.id %></td>
+    <td><%= gallery_item.try(:article).try :title %></td>
+    <td><%= gallery_item.image_file_name %></td>
     <td><%= link_to 'Show', gallery_item %></td>
     <td><%= link_to 'Edit', edit_gallery_item_path(gallery_item) %></td>
     <td><%= link_to 'Destroy', gallery_item, :confirm => 'Are you sure?', :method => :delete %></td>
